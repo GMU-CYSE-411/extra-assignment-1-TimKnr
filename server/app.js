@@ -122,8 +122,7 @@ async function createApp() {
     const sessionId = createSessionId();
 
     const csrfToken = crypto.randomBytes(24).toString("hex");
-
-    await db.run("DELETE FROM sessions WHERE id = ?", [sessionId]);
+    
     await db.run(
       "INSERT INTO sessions (id, user_id, created_at, csrf_token) VALUES (?, ?, ?, ?)",
       [sessionId, user.id, new Date().toISOString(), csrfToken]
