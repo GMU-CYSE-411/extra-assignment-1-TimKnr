@@ -33,7 +33,10 @@ async function loadNotes(ownerId, search) {
 
   const result = await api(`/api/notes?${query.toString()}`);
   const notesList = document.getElementById("notes-list");
-  notesList.innerHTML = "";
+
+  while (notesList.firstChild) {
+    notesList.removeChild(notesList.firstChild);
+  }
 
     result.notes.forEach(note => {
       notesList.appendChild(noteCard(note));
